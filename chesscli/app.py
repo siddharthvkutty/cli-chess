@@ -86,7 +86,7 @@ class GameScreen(Screen):
     BINDINGS = [Binding("tab", "toggle_focus", "Board/Move box"), Binding("ctrl+b", "leave", "Back to menu")]
     DEFAULT_CSS = """
     #main { height: 1fr; }
-    #side { width: 1fr; min-width: 28; padding: 0 2; }
+    #side { width: 34; padding: 0 2; }
     #status { height: auto; margin-bottom: 1; text-style: bold; }
     #moves-box { height: 1fr; border: round $primary-darken-2; padding: 0 1; }
     #message { height: auto; color: $warning; }

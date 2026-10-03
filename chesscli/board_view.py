@@ -11,6 +11,10 @@ LIGHT, DARK = "#d2b48c", "#7b5b3f"
 LAST_LIGHT, LAST_DARK = "#cdd26a", "#aaa23a"
 SELECTED, CURSOR, TARGET_CAPTURE, CHECK = "#f6f669", "#6aa84f", "#d9776b", "#e03c31"
 LEFT_MARGIN = 2
+# Layout constants shared with the game screen's CSS (app.py)
+SIDE_PANEL_WIDTH = 34
+BOARD_MARGINS = 4  # BoardView margin: 1 2
+CHROME_ROWS = 8  # header, move box, footer, board margins, file-letter row
 
 
 class BoardView(Widget, can_focus=True):
@@ -45,9 +49,15 @@ class BoardView(Widget, can_focus=True):
     # --- geometry -------------------------------------------------------------------------
     @property
     def cell(self) -> tuple[int, int]:
-        """(width, height) of a square: big on roomy terminals, compact otherwise."""
+        """(width, height) of a square: the largest that fits the terminal next to the side panel.
+
+        Terminal cells are about twice as tall as wide, so a square is (2h+1) columns by h rows.
+        """
         size = self.app.size
-        return (7, 3) if size.height >= 34 and size.width >= 90 else (3, 1)
+        by_height = (size.height - CHROME_ROWS) // 8
+        by_width = (size.width - SIDE_PANEL_WIDTH - BOARD_MARGINS - LEFT_MARGIN - 1) // 16
+        rows = max(1, min(4, by_height, by_width))
+        return 2 * rows + 1, rows
 
     def get_content_width(self, container, viewport) -> int:
         return LEFT_MARGIN + 8 * self.cell[0]
