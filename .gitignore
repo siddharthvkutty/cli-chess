@@ -1,0 +1,23 @@
+claude-resume
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+
+# Tooling
+.pytest_cache/
+
+# Games saved by the `save` command
+game-*.pgn
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store

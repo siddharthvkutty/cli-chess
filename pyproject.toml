@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cli-chess"
+version = "0.1.0"
+description = "Chess in your terminal: local, vs Stockfish, or online with a game code"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "chess>=1.10",
+    "textual>=0.80",
+    "websockets>=14",
+    "platformdirs>=4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+chess-cli = "chesscli.__main__:main"
+
+[tool.setuptools]
+packages = ["chesscli"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
